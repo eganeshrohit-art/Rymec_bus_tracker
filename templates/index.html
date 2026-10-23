@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CampusRide | College Bus Tracking</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand-mark">CR</div>
+    <div>
+      <div class="brand">CampusRide</div>
+      <div class="subtitle">College Bus Tracking System</div>
+    </div>
+    <div class="demo-tag"><span class="dot"></span> SIMULATION DEMO</div>
+  </header>
+
+  <main class="layout">
+    <section class="intro">
+      <div class="eyebrow">STUDENT TRANSPORT · LIVE DASHBOARD</div>
+      <h1>Know when your<br><span>bus is arriving.</span></h1>
+      <p>Track the bus route, check its next stop, and view an estimated arrival time in one place.</p>
+      <div class="notice"><strong>Prototype mode:</strong> Bus movement is simulated for demonstration. No real GPS device is connected.</div>
+    </section>
+
+    <section class="stats" aria-label="Bus status">
+      <article class="stat-card">
+        <div class="stat-label">BUS NUMBER</div>
+        <div class="stat-value" id="busId">BUS-01</div>
+        <div class="stat-foot">College shuttle</div>
+      </article>
+      <article class="stat-card">
+        <div class="stat-label">ESTIMATED ARRIVAL</div>
+        <div class="stat-value"><span id="eta">--</span><small> min</small></div>
+        <div class="stat-foot">To next stop</div>
+      </article>
+      <article class="stat-card">
+        <div class="stat-label">DISTANCE TO NEXT STOP</div>
+        <div class="stat-value"><span id="distance">--</span><small> km</small></div>
+        <div class="stat-foot">Approximate straight-line distance</div>
+      </article>
+    </section>
+
+    <section class="map-panel">
+      <div class="panel-heading">
+        <div>
+          <h2>Bus route map</h2>
+          <p>Sample route and bus position</p>
+        </div>
+        <div class="status-pill"><span class="dot"></span><span id="status">Loading bus…</span></div>
+      </div>
+      <div id="map" role="application" aria-label="Map showing bus route"></div>
+      <div class="map-legend">
+        <span><i class="legend-bus"></i> Simulated bus</span>
+        <span><i class="legend-stop"></i> Bus stop</span>
+        <span><i class="legend-route"></i> Route</span>
+      </div>
+    </section>
+
+    <aside class="side-panel">
+      <div class="panel-heading">
+        <div><h2>Route information</h2><p>Stops on this route</p></div>
+      </div>
+      <div id="nextStopCard" class="next-stop">
+        <div class="small-label">NEXT STOP</div>
+        <div id="nextStop" class="next-stop-name">Loading…</div>
+        <div class="muted">Bus position updates automatically</div>
+      </div>
+      <ol id="stopList" class="stop-list"></ol>
+      <div class="updated">Last updated <strong id="updatedAt">--:--:--</strong></div>
+    </aside>
+
+    <section class="how-panel">
+      <div class="how-icon">↗</div>
+      <div><h2>How this prototype works</h2><p>The backend returns sample coordinates, the map displays the bus, and the dashboard calculates a simple ETA. For real deployment, connect a GPS-enabled phone or tracker and use actual route/traffic data.</p></div>
+    </section>
+  </main>
+  <footer>CampusRide Prototype · Built for student project demonstration</footer>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
